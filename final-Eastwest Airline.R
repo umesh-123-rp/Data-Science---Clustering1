@@ -1,12 +1,15 @@
 # Q: Perform clustering (Both hierarchical and K means clustering) for the airlines
 # data to obtain optimum number of clusters. Draw the inferences from the 
-# clusters obtained. 
-EastWestAirlines<-read.csv("D:\\Data\\IN102385\\Downloads\\EastWestAirlines.csv")
-summary(EastWestAirlines[,2:12])
+# clusters obtained.
+
+# Loading the data
+EastWestAirlines<-read.csv("D:\\Dataset-Clustering\\EastWestAirlines.csv")
 cor(EastWestAirlines[,2:12])
 pairs(EastWestAirlines[,2:12])
+
 # Normalization of data for Hierarchical Clustering
 mydata <- scale(EastWestAirlines[,2:12])
+summary(mydata)
 # Hierarchical Clustering Algorithm 
 d <- dist(mydata, method = "euclidean") #Computing the distance natrix
 fit <- hclust(d, method="average") # Building the algorithm 
@@ -18,7 +21,7 @@ View(aggregate(final[,-2], by=list(membership), FUN = mean))
 # draw dendrogram with red borders around the 5 clusters 
 rect.hclust(fit, k=5, border="red")
 #Attach the cluster numbers to Airlines
-clusters=data.frame('Airlines'=EastWestAirlines[,1],'Cluster' =clusters)
+clusters=data.frame('Airlines'=EastWestAirlines[,1],'Cluster' =groups)
 View(clusters)
 # Hierarchical Cluster for large datasize like 3999 looks to be very complicated.
 # K-means can give us correct clustering 
